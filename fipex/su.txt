@@ -1,0 +1,41 @@
+
+Script original (ICD sec. 3.9):
+
+43 c0 bf 56 1a 10 0e 0a
+7e 0f 00 0f 3c 00               0 + 6 = 6
+7e 0b 00 0b 3c 00               6 + 6 = 12
+7e 11 03 04 01 00 17 ff ff     12 + 9 = 21
+7e 11 03 05 10 0a 0d ff ff     21 + 9 = 30
+7e 11 03 02 c8 00 d8 ff ff     30 + 9 = 39
+7e 0c 00 0c 2c 01              39 + 6 = 45
+7e 20 00 20 ff ff              45 + 6 = 51
+7e 21 00 21 ff ff              51 + 6 = 57
+7e f0 00 f0 ff ff              57 + 6 = 63
+7e ff 01 fe                    63 + 4 = 67 (= script length)
+
+
+Apres mise en forme:
+
+43                          script length (67 bytes), see Table 3-1
+   c0 bf 56 1a              start time (01.01.2000 00:00:00 UTC + 441892800s = 01.01.2014 12:00:00 UTC)
+               10 0e        repeat time (3600s)
+                     0a     command count (10)
+7e 0f 00 0f                 CMD_ID: 0x0f (OBC_SU_ON), LEN: 0x00, XOR: 0x0f
+            3c 00           DELAYx (60s)
+7e 0b 00 0b                 CMD_ID: 0x0b (SU_SC), LEN: 0x00, XOR: 0x0b
+            3c 00           DELAYx (60s)
+7e 11 03 04 01 00 17        CMD_ID: 0x11 (SU_SP), LEN: 0x03, XOR: 0x17, DATA: [ 0x04, 0x01, 0x00 ]
+                     ff ff  DELAYx (none)
+7e 11 03 05 10 0a 0d        CMD_ID: 0x11 (SU_SP), LEN: 0x03, XOR: 0x0d, DATA: [ 0x05, 0x10, 0x0a ]
+                     ff ff  DELAYx (none)
+7e 11 03 02 c8 00 d8        CMD_ID: 0x11 (SU_SP), LEN: 0x03, XOR: 0xd8, DATA: [ 0x02, 0xc8, 0x00 ]
+                     ff ff  DELAYx (none)
+7e 0c 00 0c                 CMD_ID: 0x0c (SU_SM), LEN: 0x00, XOR: 0x0c
+            2c 01           DELAYx (300s)
+7e 20 00 20                 CMD_ID: 0x20 (SU_HK), LEN: 0x00, XOR: 0x20
+            ff ff           DELAYx (none)
+7e 21 00 21                 CMD_ID: 0x21 (SU_DP), LEN: 0x00, XOR: 0x21
+            ff ff           DELAYx (none)
+7e f0 00 f0                 CMD_ID: 0xf0 (OBC_SU_OFF), LEN: 0x00, XOR: 0xf0
+            ff ff           DELAYx (none)
+7e ff 01 fe                 CMD_ID: 0xff (OBC_SU_END) - special case: "Three Byte command", see Table 3-1

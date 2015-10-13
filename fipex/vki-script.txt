@@ -1,0 +1,3 @@
+#!/usr/bin/perl -w
+
+print pack( 'H*', '43c0bf561a100e0a7e0f000f3c007e0b000b3c007e110304010017ffff7e110305100a0dffff7e110302c800d8ffff7e0c000c2c017e200020ffff7e210021ffff7ef000f0ffff7eff01fe' );
