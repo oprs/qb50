@@ -3,4 +3,4 @@
 * `fipex`: interprétation des scripts FIPEX du VKI
 * `igrf`: interrogation de la table champ magnétique en C++
 * `tle-xyz`: conversion TLE -> coordonnées terrestres
-* `testsalbedo`: estimation du vecteur solaire + albedo
+* `albedo`: estimation du vecteur solaire + albedo
